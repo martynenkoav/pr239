@@ -46,50 +46,34 @@ public class Main {
         final JTextField n = new JTextField();
         n.setBounds(35,70,25,25);
         butPanel.add(n);
-        JLabel addTrianglewithCoords = new JLabel("Добавить треугольник по координатам");
-        addTrianglewithCoords.setBounds(2,200,300,25);
-        butPanel.add(addTrianglewithCoords);
-        JLabel X1 = new JLabel("X:");
-        X1.setBounds(2,225,15,25);
-        butPanel.add(X1);
-        JLabel Y1 = new JLabel("Y:");
-        Y1.setBounds(45,225,15,25);
-        butPanel.add(Y1);
-        JLabel X2 = new JLabel("X:");
-        X2.setBounds(2,265,15,25);
-        butPanel.add(X2);
-        JLabel Y2 = new JLabel("Y:");
-        Y2.setBounds(45,265,15,25);
-        butPanel.add(Y2);
-        JLabel X3 = new JLabel("X:");
-        X3.setBounds(2,300,15,25);
-        butPanel.add(X3);
-        JLabel Y3 = new JLabel("Y:");
-        Y3.setBounds(45,300,15,25);
-        butPanel.add(Y3);
-        final JTextField x1 = new JTextField();
-        x1.setBounds(17,225, 25,25);
-        butPanel.add(x1);
-        final JTextField y1 = new JTextField();
-        y1.setBounds(60,225, 25,25);
-        butPanel.add(y1);
-        final JTextField x2 = new JTextField();
-        x2.setBounds(17,265, 25,25);
-        butPanel.add(x2);
-        final JTextField y2 = new JTextField();
-        y2.setBounds(60,265, 25,25);
-        butPanel.add(y2);
-        final JTextField x3 = new JTextField();
-        x3.setBounds(17,300, 25,25);
-        butPanel.add(x3);
-        final JTextField y3 = new JTextField();
-        y3.setBounds(60,300, 25,25);
-        butPanel.add(y3);
 
-
-        JButton button3 = new JButton("Добавить треугольник");
-        button3.setBounds(2,340,160,40);
+        JButton button3 = new JButton("Считывание из файла");
+        button3.setBounds(2,200,160,40);
         butPanel.add(button3);
+        button3.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Считывание из файла");
+        }});
+
+
+        JButton button4 = new JButton("Записывание в файл");
+        button4.setBounds(2,250,160,40);
+        butPanel.add(button4);
+        button4.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Записывание в файл");
+            }});
+
+        JButton button5 = new JButton("Решение задачи");
+        button5.setBounds(2,300,160,40);
+        butPanel.add(button5);
+        button5.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Решение задачи");
+            }});
 
 
 
