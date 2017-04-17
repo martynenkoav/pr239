@@ -1,3 +1,7 @@
+package com.problem;
+
+import com.bot.Point;
+
 /**
  * Created by Анастасия on 22.01.2017.
  */
@@ -10,12 +14,12 @@ public class Triangle {
         return "Triangle{"+ a+","+b+","+c+"}";
     }
 
-    Triangle(Point a,Point b, Point c){
-        this.a=Math.round(a.getLength(b)*1000)/1000;
-        this.b=Math.round(b.getLength(c)*1000)/1000;
-        this.c=Math.round(c.getLength(a)*1000)/1000;
+    public Triangle(Point a, Point b, Point c){
+        this.a=Math.round(a.getLength(b));
+        this.b=Math.round(b.getLength(c));
+        this.c=Math.round(c.getLength(a));
     }
-    boolean isEquilateral(){
+    public boolean isEquilateral(){
         return this.a==this.b&&this.a==this.c;
         }
     }

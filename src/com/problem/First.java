@@ -1,4 +1,6 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
+
+package com.problem;
+import com.bot.Point;
 
 import java.util.Scanner;
 
@@ -11,9 +13,9 @@ public class First {
         Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
         int cnt=0;
-        Point [] arr=new Point[n];
+        Point[] arr=new Point[n];
         for(int i=0;i<n;i++){
-            arr[i]=new Point(sc.nextDouble(),sc.nextDouble());
+            arr[i]=new Point(sc.nextInt(),sc.nextInt());
         }
         for(int i=0;i<n;i++){
             for (int j=i+1;j<n;j++){

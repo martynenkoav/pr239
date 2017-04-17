@@ -1,5 +1,7 @@
 package com.bot;
 
+import com.problem.Triangle;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -48,7 +50,7 @@ public class Main {
         butPanel.add(n);
 
         JButton button3 = new JButton("Считывание из файла");
-        button3.setBounds(2,200,160,40);
+        button3.setBounds(2,200,200,40);
         butPanel.add(button3);
         button3.addActionListener(new ActionListener(){
             @Override
@@ -58,7 +60,7 @@ public class Main {
 
 
         JButton button4 = new JButton("Записывание в файл");
-        button4.setBounds(2,250,160,40);
+        button4.setBounds(2,250,200,40);
         butPanel.add(button4);
         button4.addActionListener(new ActionListener(){
             @Override
@@ -67,19 +69,33 @@ public class Main {
             }});
 
         JButton button5 = new JButton("Решение задачи");
-        button5.setBounds(2,300,160,40);
+        button5.setBounds(2,300,200,40);
         butPanel.add(button5);
         button5.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Решение задачи");
+                int cnt=0;
+                for(int i=0;i<points.size();i++){
+                    for (int j=i+1;j<points.size();j++){
+                        for (int k=j+1;k<points.size();k++){
+                            Point a=points.get(i);
+                            Point b=points.get(j);
+                            Point c=points.get(k);
+                            Triangle tr=new Triangle(a,b,c);
+                            if (tr.isEquilateral()==false){
+                            cnt+=1;
+                            }
+                        }
+                    }
+                }
+                 System.out.println(cnt==0?true:false);
             }});
 
 
 
 
         JButton button1 = new JButton("Добавить точку");
-        button1.setBounds(2,100,160,40);
+        button1.setBounds(2,100,200,40);
         butPanel.add(button1);
         button1.addActionListener(new ActionListener(){
             @Override
@@ -110,7 +126,7 @@ public class Main {
 
             }
         });
-        JButton button2 = new JButton("очистить");
+        JButton button2 = new JButton("Очистить");
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,7 +141,7 @@ public class Main {
                 }
             }
         });
-        button2.setBounds(2,150,160,40);
+        button2.setBounds(2,150,200,40);
         butPanel.add(button2);
         panel.add(pointpane,BorderLayout.CENTER);
         panel.add(butPanel,BorderLayout.EAST);
