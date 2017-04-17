@@ -68,6 +68,9 @@ public class Main {
                 System.out.println("Записывание в файл");
             }});
 
+        final JLabel Answer = new JLabel("Ответ:");
+        Answer.setBounds(2,350,80,25);
+        butPanel.add(Answer);
         JButton button5 = new JButton("Решение задачи");
         button5.setBounds(2,300,200,40);
         butPanel.add(button5);
@@ -88,8 +91,11 @@ public class Main {
                         }
                     }
                 }
-                 System.out.println(cnt==0?true:false);
+                Answer.setText("Ответ:"+" "+(cnt==0?"Да":"Нет"));
             }});
+
+
+
 
 
 
