@@ -1,18 +1,14 @@
 package com.bot;
 
-import com.problem.Triangle;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     private static ArrayList<Point> points = new ArrayList<Point>();
+    private static ArrayList<Triangle> triangls = new ArrayList<Triangle>();
     public static void createGUI() {
         final JFrame frame = new JFrame("Testframe");
 	    frame.setPreferredSize(new Dimension(700,700));
@@ -85,15 +81,21 @@ public class Main {
                             Point b=points.get(j);
                             Point c=points.get(k);
                             Triangle tr=new Triangle(a,b,c);
+
                             if (tr.isEquilateral()==false){
-                            cnt+=1;
+                                cnt+=1;
+                            }else{
+                                tr.setBounds(0,0,400,500);
+                                pointpane.add(tr);
                             }
+
                         }
                     }
                 }
+                pointpane.revalidate();
+                pointpane.repaint();
                 Answer.setText("Ответ:"+" "+(cnt==0?"Да":"Нет"));
             }});
-
 
 
 
@@ -141,6 +143,15 @@ public class Main {
                         int index = points.size() - 1;
                         Point point = points.remove(index);
                         pointpane.remove(point);
+                        pointpane.repaint();
+                        pointpane.revalidate();
+                    }
+                }
+                for (int i=0;i<triangls.size();i++){
+                    while(triangls.size() > 0) {
+                        int index = triangls.size() - 1;
+                        Triangle triangle = triangls.remove(index);
+                        pointpane.remove(triangle);
                         pointpane.repaint();
                         pointpane.revalidate();
                     }

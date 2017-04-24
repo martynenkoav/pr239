@@ -9,12 +9,13 @@ import java.awt.*;
 public class Point extends JPanel {
     public int x;
     public int y;
+
     public Point(int x, int y){
         this.x=x;
         this.y=y;
     }
     public void paint(Graphics g){
-        g.setColor(Color.GREEN);
+        g.setColor(Color.ORANGE);
         g.fillRect(0,0,3,3);
         g.setColor(Color.red);
     }

@@ -1,6 +1,7 @@
 
 package com.problem;
 import com.bot.Point;
+import com.bot.Triangle;
 
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
  */
 public class First {
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
+    /*    Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
         int cnt=0;
         Point[] arr=new Point[n];
@@ -30,6 +31,6 @@ public class First {
                 }
             }
         }
-        System.out.println(cnt==0?true:false);
+        System.out.println(cnt==0?true:false);*/
     }
     }
