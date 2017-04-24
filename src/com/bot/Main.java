@@ -94,7 +94,7 @@ public class Main {
                 }
                 pointpane.revalidate();
                 pointpane.repaint();
-                Answer.setText("Ответ:"+" "+(cnt==0?"Да":"Нет"));
+                Answer.setText("Ответ:"+" "+(cnt==?"Да":"Нет"));
             }});
 
 
