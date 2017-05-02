@@ -73,7 +73,6 @@ public class Main {
         button5.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                int cnt=0;
                 for(int i=0;i<points.size();i++){
                     for (int j=i+1;j<points.size();j++){
                         for (int k=j+1;k<points.size();k++){
@@ -82,9 +81,7 @@ public class Main {
                             Point c=points.get(k);
                             Triangle tr=new Triangle(a,b,c);
 
-                            if (tr.isEquilateral()==false){
-                                cnt+=1;
-                            }else{
+                            if (tr.isEquilateral()==true){
                                 tr.setBounds(0,0,400,500);
                                 pointpane.add(tr);
                             }
@@ -92,9 +89,29 @@ public class Main {
                         }
                     }
                 }
+                boolean cnt=false;
+                for(int i=0;i<points.size();i++){
+                    for (int j=i+1;j<points.size();j++){
+                        cnt=false;
+                        for (int k=j+1;k<points.size();k++){
+                            Point a=points.get(i);
+                            Point b=points.get(j);
+                            Point c=points.get(k);
+                            Triangle tr=new Triangle(a,b,c);
+                            if (tr.isEquilateral()==true){
+                                cnt=true;
+                            }
+
+                        }
+                        if (cnt==false){
+                            i=points.size();
+                            j=points.size();
+                        }
+                    }
+                }
                 pointpane.revalidate();
                 pointpane.repaint();
-                Answer.setText("Ответ:"+" "+(cnt==?"Да":"Нет"));
+                Answer.setText("Ответ:"+" "+(cnt==false?"Да":"Нет"));
             }});
 
 
