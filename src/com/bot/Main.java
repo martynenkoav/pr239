@@ -4,7 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+
+
 
 public class Main {
     private static ArrayList<Point> points = new ArrayList<Point>();
@@ -48,9 +54,66 @@ public class Main {
         JButton button3 = new JButton("Считывание из файла");
         button3.setBounds(2,200,200,40);
         butPanel.add(button3);
+        final JLabel Answer = new JLabel("Ответ:");
+        Answer.setBounds(2,350,80,25);
+        butPanel.add(Answer);
         button3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                try (Scanner in = new Scanner(new File("input.txt"))) {
+                    int n = in.nextInt();
+                    for (int i = 0 ; i < n; i++) {
+                        points.add(new Point(in.nextInt(), in.nextInt()));
+                    }
+                    in.close();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+                for(int i=0;i<points.size();i++){
+                    points.get(i).setBounds(points.get(i).x,points.get(i).y,points.get(i).x+3,points.get(i).y+3);
+                    pointpane.add(points.get(i));
+                    pointpane.revalidate();
+                    pointpane.repaint();
+                }
+                for(int i=0;i<points.size();i++){
+                    for (int j=i+1;j<points.size();j++){
+                        for (int k=j+1;k<points.size();k++){
+                            Point a=points.get(i);
+                            Point b=points.get(j);
+                            Point c=points.get(k);
+                            Triangle tr=new Triangle(a,b,c);
+
+                            if (tr.isEquilateral()==true){
+                                tr.setBounds(0,0,400,500);
+                                pointpane.add(tr);
+                            }
+
+                        }
+                    }
+                }
+                boolean cnt=false;
+                for(int i=0;i<points.size();i++){
+                    for (int j=i+1;j<points.size();j++){
+                        cnt=false;
+                        for (int k=j+1;k<points.size();k++){
+                            Point a=points.get(i);
+                            Point b=points.get(j);
+                            Point c=points.get(k);
+                            Triangle tr=new Triangle(a,b,c);
+                            if (tr.isEquilateral()==true){
+                                cnt=true;
+                            }
+
+                        }
+                        if (cnt==false){
+                            i=points.size();
+                            j=points.size();
+                        }
+                    }
+                }
+                pointpane.revalidate();
+                pointpane.repaint();
+                Answer.setText("Ответ:"+" "+(cnt==false?"Да":"Нет"));
                 System.out.println("Считывание из файла");
         }});
 
@@ -64,9 +127,7 @@ public class Main {
                 System.out.println("Записывание в файл");
             }});
 
-        final JLabel Answer = new JLabel("Ответ:");
-        Answer.setBounds(2,350,80,25);
-        butPanel.add(Answer);
+
         JButton button5 = new JButton("Решение задачи");
         button5.setBounds(2,300,200,40);
         butPanel.add(button5);
@@ -195,3 +256,4 @@ public class Main {
         });
     }
 }
+
