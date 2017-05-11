@@ -4,6 +4,7 @@ import com.bot.Point;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Created by Анастасия on 22.01.2017.
@@ -20,6 +21,24 @@ public class Triangle extends JPanel {
         return "Triangle{" + aLength + "," + bLength + "," + cLength + "}";
     }
 
+    public static int max3(int a, int b, int c){
+        return Math.max(Math.max(a,b),c);
+    }
+
+    public static int min3(int a, int b, int c){
+        return Math.min(Math.min(a,b),c);
+    }
+
+    public int[] getTrBounds(){
+        int arr [] = {
+                0,
+                0,
+                max3(a.x,b.x,c.x)+3,
+                max3(a.y,b.y,c.y)+3,
+
+        };
+        return arr;
+    }
     public Triangle(Point a, Point b, Point c) {
         this.aLength = Math.round(a.getLength(b));
         this.bLength = Math.round(b.getLength(c));
@@ -44,4 +63,6 @@ public class Triangle extends JPanel {
 
     }
 }
+
+
 

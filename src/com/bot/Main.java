@@ -14,11 +14,12 @@ import java.util.Scanner;
 
 public class Main {
     private static ArrayList<Point> points = new ArrayList<Point>();
-    private static ArrayList<Triangle> triangls = new ArrayList<Triangle>();
+    private static ArrayList<Triangle> triangles = new ArrayList<Triangle>();
+
     public static void createGUI() {
         final JFrame frame = new JFrame("Testframe");
-	    frame.setPreferredSize(new Dimension(700,700));
-	    JPanel panel = new JPanel(new BorderLayout());
+        frame.setPreferredSize(new Dimension(700,700));
+        JPanel panel = new JPanel(new BorderLayout());
         Panel butPanel = new Panel();
         butPanel.setLayout(null);
         butPanel.setPreferredSize(new Dimension(250,700));
@@ -26,12 +27,12 @@ public class Main {
         pointpane.setLayout(null);
         //pointpane.setPreferredSize(new Dimension(350,700));
 
-	    JLabel addPointwithCoords = new JLabel("Добавить точку по координатам");
-	    addPointwithCoords.setBounds(2,2,300,25);
-	    butPanel.add(addPointwithCoords);
-	    JLabel addRandomPoints = new JLabel("Добавить рандомное количество точек");
-	    addRandomPoints.setBounds(2,50,300,25);
-	    butPanel.add(addRandomPoints);
+        JLabel addPointwithCoords = new JLabel("Добавить точку по координатам");
+        addPointwithCoords.setBounds(2,2,300,25);
+        butPanel.add(addPointwithCoords);
+        JLabel addRandomPoints = new JLabel("Добавить рандомное количество точек");
+        addRandomPoints.setBounds(2,50,300,25);
+        butPanel.add(addRandomPoints);
         JLabel X = new JLabel("X:");
         X.setBounds(2,25,15,25);
         butPanel.add(X);
@@ -75,47 +76,8 @@ public class Main {
                     pointpane.revalidate();
                     pointpane.repaint();
                 }
-                for(int i=0;i<points.size();i++){
-                    for (int j=i+1;j<points.size();j++){
-                        for (int k=j+1;k<points.size();k++){
-                            Point a=points.get(i);
-                            Point b=points.get(j);
-                            Point c=points.get(k);
-                            Triangle tr=new Triangle(a,b,c);
-
-                            if (tr.isEquilateral()==true){
-                                tr.setBounds(0,0,400,500);
-                                pointpane.add(tr);
-                            }
-
-                        }
-                    }
-                }
-                boolean cnt=false;
-                for(int i=0;i<points.size();i++){
-                    for (int j=i+1;j<points.size();j++){
-                        cnt=false;
-                        for (int k=j+1;k<points.size();k++){
-                            Point a=points.get(i);
-                            Point b=points.get(j);
-                            Point c=points.get(k);
-                            Triangle tr=new Triangle(a,b,c);
-                            if (tr.isEquilateral()==true){
-                                cnt=true;
-                            }
-
-                        }
-                        if (cnt==false){
-                            i=points.size();
-                            j=points.size();
-                        }
-                    }
-                }
-                pointpane.revalidate();
-                pointpane.repaint();
-                Answer.setText("Ответ:"+" "+(cnt==false?"Да":"Нет"));
                 System.out.println("Считывание из файла");
-        }});
+            }});
 
 
         JButton button4 = new JButton("Записывание в файл");
@@ -134,45 +96,35 @@ public class Main {
         button5.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(int i=0;i<points.size();i++){
-                    for (int j=i+1;j<points.size();j++){
+                boolean answer = true;
+                for(int i=0;i<points.size()-2;i++){
+                    for (int j=i+1;j<points.size()-1;j++){
+                        boolean cnt=false;
                         for (int k=j+1;k<points.size();k++){
                             Point a=points.get(i);
                             Point b=points.get(j);
                             Point c=points.get(k);
                             Triangle tr=new Triangle(a,b,c);
-
-                            if (tr.isEquilateral()==true){
-                                tr.setBounds(0,0,400,500);
-                                pointpane.add(tr);
-                            }
-
-                        }
-                    }
-                }
-                boolean cnt=false;
-                for(int i=0;i<points.size();i++){
-                    for (int j=i+1;j<points.size();j++){
-                        cnt=false;
-                        for (int k=j+1;k<points.size();k++){
-                            Point a=points.get(i);
-                            Point b=points.get(j);
-                            Point c=points.get(k);
-                            Triangle tr=new Triangle(a,b,c);
-                            if (tr.isEquilateral()==true){
+                            if (tr.isEquilateral()){
                                 cnt=true;
+                                int [] bounds = tr.getTrBounds();
+                                //System.out.println(Arrays.toString(bounds));
+                                tr.setBounds(bounds[0],bounds[1],bounds[2],bounds[3]);
+                                pointpane.add(tr);
+                                triangles.add(tr);
                             }
+                            System.out.println(cnt);
+                        }
+                        System.out.println(cnt);
+                        if (cnt==false) {
+                            answer = false;
+                        }
 
-                        }
-                        if (cnt==false){
-                            i=points.size();
-                            j=points.size();
-                        }
                     }
                 }
                 pointpane.revalidate();
                 pointpane.repaint();
-                Answer.setText("Ответ:"+" "+(cnt==false?"Да":"Нет"));
+                Answer.setText("Ответ:"+" "+(answer?"Да":"Нет"));
             }});
 
 
@@ -225,15 +177,17 @@ public class Main {
                         pointpane.revalidate();
                     }
                 }
-                for (int i=0;i<triangls.size();i++){
-                    while(triangls.size() > 0) {
-                        int index = triangls.size() - 1;
-                        Triangle triangle = triangls.remove(index);
+                for (int i=0;i<triangles.size();i++){
+                    while(triangles.size() > 0) {
+                        int index = triangles.size() - 1;
+                        Triangle triangle = triangles.remove(index);
                         pointpane.remove(triangle);
                         pointpane.repaint();
                         pointpane.revalidate();
                     }
                 }
+                points.clear();
+                triangles.clear();
             }
         });
         button2.setBounds(2,150,200,40);
@@ -256,4 +210,7 @@ public class Main {
         });
     }
 }
+
+
+
 
