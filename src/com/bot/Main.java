@@ -107,7 +107,6 @@ public class Main {
                                 if ((tr.isEquilateral())&&(!tr.isSame())){
                                     a.setRmt(true);
                                     int [] bounds = tr.getTrBounds();
-                                    //System.out.println(Arrays.toString(bounds));
                                     tr.setBounds(bounds[0],bounds[1],bounds[2],bounds[3]);
                                     pointpane.add(tr);
                                     triangles.add(tr);

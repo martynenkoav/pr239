@@ -16,18 +16,11 @@ public class Triangle extends JPanel {
 
     Point a, b, c;
 
-    @Override
-    public String toString() {
-        return "Triangle{" + aLength + "," + bLength + "," + cLength + "}";
-    }
 
     public static int max3(int a, int b, int c){
         return Math.max(Math.max(a,b),c);
     }
 
-    public static int min3(int a, int b, int c){
-        return Math.min(Math.min(a,b),c);
-    }
 
     public int[] getTrBounds(){
         int arr [] = {
