@@ -96,35 +96,40 @@ public class Main {
         button5.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean answer = true;
-                for(int i=0;i<points.size()-2;i++){
-                    for (int j=i+1;j<points.size()-1;j++){
-                        boolean cnt=false;
-                        for (int k=j+1;k<points.size();k++){
-                            Point a=points.get(i);
-                            Point b=points.get(j);
-                            Point c=points.get(k);
-                            Triangle tr=new Triangle(a,b,c);
-                            if (tr.isEquilateral()){
-                                cnt=true;
-                                int [] bounds = tr.getTrBounds();
-                                //System.out.println(Arrays.toString(bounds));
-                                tr.setBounds(bounds[0],bounds[1],bounds[2],bounds[3]);
-                                pointpane.add(tr);
-                                triangles.add(tr);
+                for(int i=0;i<points.size();i++){
+                    Point a=points.get(i);
+                    if (a.isRmt()==false) {
+                        for (int j=0;j<points.size();j++){
+                            for (int k=0;k<points.size();k++){
+                                Point b=points.get(j);
+                                Point c=points.get(k);
+                                Triangle tr=new Triangle(a,b,c);
+                                if ((tr.isEquilateral())&&(!tr.isSame())){
+                                    a.setRmt(true);
+                                    int [] bounds = tr.getTrBounds();
+                                    //System.out.println(Arrays.toString(bounds));
+                                    tr.setBounds(bounds[0],bounds[1],bounds[2],bounds[3]);
+                                    pointpane.add(tr);
+                                    triangles.add(tr);
+                                }
                             }
-                            System.out.println(cnt);
                         }
-                        System.out.println(cnt);
-                        if (cnt==false) {
-                            answer = false;
-                        }
-
+                    }
+                }
+                int cnt=0;
+                for(int i=0;i<points.size();i++){
+                    Point a=points.get(i);
+                    if (a.isRmt()==false){
+                        cnt++;
                     }
                 }
                 pointpane.revalidate();
                 pointpane.repaint();
-                Answer.setText("Ответ:"+" "+(answer?"Да":"Нет"));
+                if (cnt==0){
+                    Answer.setText("Ответ:"+"Да");
+                } else {
+                    Answer.setText("Ответ:"+"Нет");
+                }
             }});
 
 

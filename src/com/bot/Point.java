@@ -9,11 +9,22 @@ import java.awt.*;
 public class Point extends JPanel {
     public int x;
     public int y;
+    public boolean rmt;
 
     public Point(int x, int y){
         this.x=x;
         this.y=y;
+        this.rmt=false;
     }
+
+    public boolean isRmt() {
+        return rmt;
+    }
+
+    public void setRmt(boolean rmt) {
+        this.rmt = rmt;
+    }
+
     public void paint(Graphics g){
         g.setColor(Color.ORANGE);
         g.fillRect(0,0,3,3);

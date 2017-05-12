@@ -54,6 +54,7 @@ public class Triangle extends JPanel {
         return this.aLength == this.bLength && this.aLength == this.cLength;
     }
 
+    public boolean isSame() {return this.a == this.b || this.c==this.a || this.b==this.c;}
 
     public void paint(Graphics g) {
         g.setColor(Color.RED);
