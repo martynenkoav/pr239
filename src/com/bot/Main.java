@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ import java.util.Scanner;
 
 
 public class Main {
+    private static boolean ma;
     private static ArrayList<Point> points = new ArrayList<Point>();
     private static ArrayList<Triangle> triangles = new ArrayList<Triangle>();
 
@@ -80,14 +82,6 @@ public class Main {
             }});
 
 
-        JButton button4 = new JButton("Записывание в файл");
-        button4.setBounds(2,250,200,40);
-        butPanel.add(button4);
-        button4.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Записывание в файл");
-            }});
 
 
         JButton button5 = new JButton("Решение задачи");
@@ -126,11 +120,30 @@ public class Main {
                 pointpane.repaint();
                 if (cnt==0){
                     Answer.setText("Ответ:"+"Да");
+                    ma=true;
                 } else {
                     Answer.setText("Ответ:"+"Нет");
+                    ma=false;
                 }
             }});
 
+
+
+        JButton button4 = new JButton("Записывание в файл");
+        button4.setBounds(2,250,200,40);
+        butPanel.add(button4);
+        button4.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try (PrintWriter out = new PrintWriter(new File("output.txt"))) {
+                        if (ma==true){
+                        out.println("Да");} else {
+                            out.println("Нет");
+                        }
+                        System.out.println("Ответ выведен в файл");
+                    } catch (Exception e1) {
+                        System.out.print("Error");}
+                    }});
 
 
 
