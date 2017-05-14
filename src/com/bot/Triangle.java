@@ -50,7 +50,7 @@ public class Triangle extends JPanel {
     public boolean isSame() {return this.a == this.b || this.c==this.a || this.b==this.c;}
 
     public void paint(Graphics g) {
-        g.setColor(Color.RED);
+        g.setColor(Color.BLUE);
         g.drawLine(a.x, a.y, b.x, b.y);
         g.drawLine(a.x, a.y, c.x, c.y);
         g.drawLine(b.x, b.y, c.x, c.y);

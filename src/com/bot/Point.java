@@ -26,9 +26,8 @@ public class Point extends JPanel {
     }
 
     public void paint(Graphics g){
-        g.setColor(Color.ORANGE);
         g.fillRect(0,0,3,3);
-        g.setColor(Color.red);
+        g.setColor(Color.BLACK);
     }
     public double getLength(Point a2){
         return Math.sqrt((this.x-a2.x)*(this.x-a2.x)+(this.y-a2.y)*(this.y-a2.y));
